@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <hackathon_productdnd_enabled>
+        <reference name="head">
+            <action method="addJs"><script>hackathon/productdnd.js</script></action>
+            <!--<action method="addCss"><stylesheet>css/factfinder.css</stylesheet></action>-->
+        </reference>
+    </hackathon_productdnd_enabled>
+</layout>
