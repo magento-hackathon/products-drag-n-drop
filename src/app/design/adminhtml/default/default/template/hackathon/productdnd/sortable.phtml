@@ -1,7 +1,12 @@
 <button onclick="changeOrder()">test</button>
 <script type="text/javascript">
         $('catalog_category_products_table').down('tbody').setAttribute('id', 'catalog_category_products_table_tbody');
-        Sortable.create('catalog_category_products_table_tbody', { tag: 'tr' });
+        Sortable.create('catalog_category_products_table_tbody', { tag: 'tr', onUpdate: function() {
+            alert('stop');
+        },
+        onChange: function(list) {
+            console.log(list);
+        }});
 
 
 </script>

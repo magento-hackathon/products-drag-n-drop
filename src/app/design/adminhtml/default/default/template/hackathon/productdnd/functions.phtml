@@ -1,5 +1,7 @@
 <script type="text/javascript">
-    function changeOrder() {
+    function changeOrder(list) {
+        console.log(list);
+
         var ajaxBlockUrl = '<?php echo $this->getUrl('*/productDnD/ajaxBlock', array('_current' => true)) ?>';
         new Ajax.Request(ajaxBlockUrl, {
             parameters: {
