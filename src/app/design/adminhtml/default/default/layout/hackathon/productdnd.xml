@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <layout>
     <adminhtml_catalog_category_edit>
-        <reference name="js">
-            <block type="core/template" name="productdnd" template="hackathon/productdnd/functions.phtml"/>
+        <reference name="head">
+            <action method="addJs"><name>hackathon/productdnd.js</name><params/><if/></action>
         </reference>
     </adminhtml_catalog_category_edit>
 </layout>
