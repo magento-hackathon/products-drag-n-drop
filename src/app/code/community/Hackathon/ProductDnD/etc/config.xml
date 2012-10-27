@@ -12,6 +12,11 @@
                 <class>Hackathon_ProductDnD_Model</class>
             </hackathon_productdnd>
         </models>
+        <helpers>
+            <hackathon_productdnd>
+                <class>Hackathon_ProductDnD_Helper</class>
+            </hackathon_productdnd>
+        </helpers>
     </global>
     <frontend>
         <controller_action_layout_load_before>
@@ -23,4 +28,13 @@
             </observers>
         </controller_action_layout_load_before>
     </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <hackathon_productdnd>
+                    <file>hackathon/productdnd.xml</file>
+                </hackathon_productdnd>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>
