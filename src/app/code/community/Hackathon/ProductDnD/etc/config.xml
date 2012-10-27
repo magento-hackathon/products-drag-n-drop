@@ -13,4 +13,14 @@
             </hackathon_productdnd>
         </models>
     </global>
+    <frontend>
+        <controller_action_layout_load_before>
+            <observers>
+                <hackathon_productdnd_addActivationLayoutHandles>
+                    <class>hackathon_productdnd/observer</class>
+                    <method>addActivationLayoutHandles</method>
+                </hackathon_productdnd_addActivationLayoutHandles>
+            </observers>
+        </controller_action_layout_load_before>
+    </frontend>
 </config>
