@@ -21,9 +21,9 @@
     <frontend>
         <layout>
             <updates>
-                <factfinder>
+                <hackathon_productdnd>
                     <file>hackathon/productdnd.xml</file>
-                </factfinder>
+                </hackathon_productdnd>
             </updates>
         </layout>
         <events>
