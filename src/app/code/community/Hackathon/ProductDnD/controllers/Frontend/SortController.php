@@ -15,10 +15,13 @@ class Hackathon_ProductDnD_Frontend_SortController extends Mage_Core_Controller_
         }
 
         $request = $this->getRequest();
-        $categoryId = (int) $request->getParam('category_id');
-        $productId = (int) $request->getParam('product_id');
-        $neighborId = (int) $request->getParam('neighbor_id');
+        $categoryId = (int) $request->getParam('categoryId');
+        $productId = (int) $request->getParam('productId');
+        $neighborId = (int) $request->getParam('neighbourId');
 
-        Mage::getModel('hackathon_productdnd/sorter')->changeProductPosition($categoryId, $productId, $neighborId);
+        $result = Mage::getModel('hackathon_productdnd/sorter')->changeProductPosition($categoryId, $productId, $neighborId);
+        $this->getResponse()->setBody(
+            json_encode($result)
+        );
     }
 }

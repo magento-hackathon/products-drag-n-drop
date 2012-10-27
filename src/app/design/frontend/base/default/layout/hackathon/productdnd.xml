@@ -2,11 +2,12 @@
 <layout version="0.1.0">
     <hackathon_productdnd_enabled>
         <reference name="head">
-            <action method="addItem"><type>skin_js</type><name>js/hackathon/productdnd/sortable.js</name></action>
+            <!--<action method="addItem"><type>skin_js</type><name>js/hackathon/productdnd/sortable.js</name></action>-->
             <action method="addCss"><stylesheet>css/hackathon/productdnd/sortable.css</stylesheet></action>
+            <action method="addJs"><name>hackathon/productdnd.js</name><params/><if/></action>
         </reference>
         <reference name="content">
-            <block type="hackathon_productdnd/json_products" after="category.products" name="productdnd.json.products" />
+            <block type="hackathon_productdnd/json_products" name="productdnd.js.sorting" template="hackathon/productdnd/sortable.phtml"/>
         </reference>
     </hackathon_productdnd_enabled>
 </layout>

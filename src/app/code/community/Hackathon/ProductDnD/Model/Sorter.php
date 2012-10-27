@@ -17,6 +17,12 @@ class Hackathon_ProductDnD_Model_Sorter extends Mage_Core_Model_Abstract
         $positions = $oldPositions = $category->getProductsPosition();
         $flippedPositions = array_flip($positions);
         if (!in_array($productId, $flippedPositions) || !in_array($neighborId, $flippedPositions)) {
+            return array(
+                'categoryId' => $categoryId,
+                'productId' => $productId,
+                'neighborId' => $neighborId,
+                'error' => Mage::helper('hackathon_productdnd')->__('Product not found')
+            );
             return false;
         }
 
@@ -56,12 +62,12 @@ class Hackathon_ProductDnD_Model_Sorter extends Mage_Core_Model_Abstract
         $positions[$productId] = $originalNeighborPosition;
 
         if ($oldPositions != $positions) {
-            Mage::app()->setCurrentStore(0);
             $category->setPostedProducts($positions);
             $category->save();
-            $modified = 1;
         }
 
-        return $modified;
+        $flippedPositions = array_flip($positions);
+        ksort($flippedPositions);
+        return $flippedPositions;
     }
 }

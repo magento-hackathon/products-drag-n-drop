@@ -6,7 +6,7 @@ function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl)
             productId: productId,
             neighbourId: neighbourId,
             isAjax: 'true',
-            form_key: typeof FORM_KEY != undefined ? FORM_KEY : ''
+            form_key: typeof FORM_KEY != 'undefined' ? FORM_KEY : ''
         }
     });
 }
@@ -18,7 +18,7 @@ function processSorting (categoryId, listId, listTag, ajaxUrl) {
         onUpdate: function(list) {
             var listSize = list.length;
             var counter = 0;
-            list.select('tr').each(function(item) {
+            list.select(listTag).each(function(item) {
                 counter++;
                 if(item.getAttribute('id') == listItemId) {
 
@@ -34,16 +34,16 @@ function processSorting (categoryId, listId, listTag, ajaxUrl) {
                             var productId = item.down().next().innerHTML;
                             var neighbourId = item.previous().down().next().innerHTML;
                         } else {
-                            var productId = item.getAttribute('id').replace('dnd-item_', '');
-                            var neighbourId = item.previous().getAttribute('id').replace('dnd-item_', '');
+                            var productId = item.getAttribute('productId');
+                            var neighbourId = item.previous().getAttribute('productId');
                         }
                     } else {
                         if (listTag == 'tr') {
                             var productId = item.down().next().innerHTML;
                             var neighbourId = item.next().down().next().innerHTML;
                         } else {
-                            var productId = item.getAttribute('id').replace('dnd-item_', '');
-                            var neighbourId = item.next().getAttribute('id').replace('dnd-item_', '');
+                            var productId = item.getAttribute('productId');
+                            var neighbourId = item.next().getAttribute('productId');
                         }
                     }
 
@@ -66,5 +66,18 @@ function resetListItems(listId, listTag) {
     $(listId).select(listTag).each(function(item) {
         i++;
         item.setAttribute('id', 'item_' + i);
+    });
+}
+
+function resetListItemsFrontend(listId, listTag, dndproducts) {
+    var i = 0;
+
+    var productIds = dndproducts.evalJSON();
+    console.log(productIds);
+    $(listId).select(listTag+'.item').each(function(item) {
+        i++;
+        item.setAttribute('id', 'item_' + i);
+        item.setAttribute('productId', productIds[i - 1]);
+        console.log(productIds[i - 1]);
     });
 }

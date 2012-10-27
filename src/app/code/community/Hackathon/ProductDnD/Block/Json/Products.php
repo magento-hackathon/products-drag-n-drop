@@ -6,14 +6,19 @@
  * Time: 17:21
  * To change this template use File | Settings | File Templates.
  */
-class Hackathon_ProductDnD_Block_Json_Products extends Mage_Core_Block_Abstract
+class Hackathon_ProductDnD_Block_Json_Products extends Mage_Core_Block_Template
 {
-    protected function _toHtml()
+    protected function getProductJson()
     {
-        $layer = Mage::getSingleton('catalog/layer');
-        $productCollection = $layer->getProductCollection();
+        $productCollection = Mage::getSingleton('catalog/layer')->getProductCollection();
         $productIds = $productCollection->getLoadedIds();
 
-        return '<script type="text/javascript">var dndproducts = "' . json_encode($productIds) . '"; var dndcategory = ' . $layer->getCurrentCategory()->getId() . ';</script>';
+        return json_encode($productIds);
+    }
+
+
+    protected function getCategoryId()
+    {
+        return Mage::getSingleton('catalog/layer')->getCurrentCategory()->getId();
     }
 }

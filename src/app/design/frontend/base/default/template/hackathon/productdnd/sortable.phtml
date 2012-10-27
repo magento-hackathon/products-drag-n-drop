@@ -1,0 +1,11 @@
+<script type="text/javascript">
+    var dndproducts = "<?php echo $this->getProductJson(); ?>";
+    var dndcategory = <?php echo $this->getCategoryId(); ?>;
+    var listId = 'products-list';
+    var listTag = 'li';
+    var ajaxUrl = '<?php echo $this->getUrl('productdnd/frontend_sort/changeProductPosition') ?>';
+
+    resetListItemsFrontend(listId, listTag, dndproducts);
+    processSorting(dndcategory, listId, listTag, ajaxUrl);
+</script>
+
