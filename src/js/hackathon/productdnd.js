@@ -21,7 +21,15 @@ function processSorting (listId, listTag, ajaxUrl) {
             list.select('tr').each(function(item) {
                 counter++;
                 if(item.getAttribute('id') == listItemId) {
-                    if (typeof item.next() == 'undefined') {
+
+                    if(counter == 1) {
+                        var delta = 0 - item.getAttribute('id').replace('item_','');
+                    } else {
+                        var previousItem = item.previous().getAttribute('id').replace('item_','');
+                        var delta = previousItem - item.getAttribute('id').replace('item_','');
+                    }
+
+                    if (delta > 0) {
                         if (listTag == 'tr') {
                             var productId = item.down().next().innerHTML;
                             var neighbourId = item.previous().down().next().innerHTML;
