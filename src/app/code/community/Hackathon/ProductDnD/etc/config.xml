@@ -37,6 +37,17 @@
             </controller_action_layout_load_before>
         </events>
     </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <hackathon_productdnd before="Mage_Adminhtml">Hackathon_ProductsDnD_Adminhtml</hackathon_productdnd>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
     <adminhtml>
         <layout>
             <updates>

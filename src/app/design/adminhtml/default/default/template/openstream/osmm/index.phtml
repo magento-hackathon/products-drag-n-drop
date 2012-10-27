@@ -1,0 +1,212 @@
+<?php
+
+/**
+ * @see Openstream_Osmm_Block_View
+ */
+
+    $projects = $this->getProjects();
+
+    if(is_array($projects) && count($projects)) :
+
+?>
+
+<div style="margin:20px;">
+    <p class="switcher a-right" style="padding:5px 10px;"><label for="osmm_project"><?php echo $this->__('Select Campaign') ?></label>:
+    <select onchange="changeProject(this);" id="osmm_project">
+        <?php foreach ($projects as $_value=>$_label): ?>
+            <option value="<?php echo $_value ?>" <?php if($this->getRequest()->getParam('project_id')==$_value): ?> selected="selected"<?php endif; ?>><?php echo $_label ?></option>
+        <?php endforeach; ?>
+    </select> or <a href="<?php echo Mage::helper('adminhtml')->getUrl('*/campaign') ?>"><?php echo $this->__('manage campaigns') ?></a></p><br/>
+    <p style="width:587px; margin:0 auto;"></p>
+
+	<div class="osmm-dashboard-wrapper">
+		<div class="osmm-dashboard-block">
+		
+			<div class="entry-edit-head"><h4><?php printf($this->__('Campaign: %s'), $this->getProjectName()) ?></h4></div>
+			<fieldset class="np">
+                <div id="container" style="width:585px; height:400px; margin:0 auto">
+                    <div class="a-center"><br/><?php echo $this->__('No records found.') ?></div>
+                </div>
+			</fieldset>
+			
+			<div class="entry-edit-head"><h4>Top Influencers</h4></div>
+			<fieldset class="np">
+				<div class="grid np top-influencers">
+					<table cellspacing="0" style="border:0;">
+						<thead>
+							<tr class="headings">
+								<th class=" no-link"><span class="nobr"><?php echo $this->__('Name') ?></span></th>
+								<th class=" no-link a-right last"><span class="nobr"><?php echo $this->__('Mentions') ?></span></th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php if(($collection = $this->getTopInfluencers()) && $collection->count()) : ?>
+                            <?php /** @var $collection Openstream_Osmm_Model_Resource_Searchinfluencers_Collection */ ?>
+                            <?php foreach($collection as $_influencer) : ?>
+                                <?php /** @var $_influencer Openstream_Osmm_Model_Searchinfluencers */ ?>
+							<tr>
+								<td><a href="<?php echo $_influencer->getUrl() ?>" target="_blank"><?php echo $_influencer->getData('search_author_name') ?></a></td>
+								<td class="a-right last"><?php echo $_influencer->getData('cnt') ?></td>
+							</tr>
+							<?php endforeach ?>
+						<?php else : ?>
+							<tr class="even"><td class="empty-text a-center" colspan="100"><?php echo $this->__('No records found.') ?></td></tr>
+						<?php endif; ?>
+						</tbody>
+					</table>
+				</div>
+			</fieldset>
+			
+		</div>
+		<div class="osmm-dashboard-block">
+			<div style="padding-left:12px;">
+			    <div class="entry-edit-head"><h4><?php echo $this->__('Raw Stream') ?></h4></div>
+			    <fieldset class="np">
+    			    <div id="mycarousel" class="jcarousel-skin-tango"><ul><!-- The content will be dynamically loaded in here --></ul></div>
+			    </fieldset>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+var theModelCarousel = null;
+var chart;
+
+jQuery(document).ready(function() {
+    var options = {
+        chart: { renderTo: "container", marginTop: 40, events: {
+            redraw: function(){
+                extrems = this.xAxis[0].getExtremes();
+                theModelCarousel.reset();
+            },
+            load: function(){
+                extrems = this.xAxis[0].getExtremes();
+            }
+        } },
+        title: "",
+        rangeSelector: { selected: 0 },
+        yAxis: [{ // left y axis
+            title: { text: null },
+            labels: { align: "left", x: 3, y: 16, formatter: function() { return Highcharts.numberFormat(this.value, 0); } },
+            showFirstLabel: false
+        }, { // right y axis
+            linkedTo: 0,
+            gridLineWidth: 0,
+            opposite: true,
+            title: { text: null },
+            labels: { align: "right", x: -3, y: 16, formatter: function() { return Highcharts.numberFormat(this.value, 0); } },
+            showFirstLabel: false
+        }],
+        legend: { align: "left", verticalAlign: "top", y: -2, floating: true, borderWidth: 0 },
+        tooltip: { shared: true, crosshairs: true },
+        plotOptions: { series: { marker: { lineWidth: 1 } } }
+    };
+
+    <?php $ret = $this->getResults(); ?>
+
+    options.series = [<?php echo str_repeat('{},', count($ret['results'])) ?>];
+
+    <?php
+
+    $series_cnt = 0;
+    while(list($key, $val) = each($ret['results'])){
+        echo 'options.series['.$series_cnt.'].data = [';
+        for($date = $ret['min_date']; $date <= $ret['max_date']; $date += 86400){
+            echo '['.($date*1000).', '.(isset($val[$date]) ? $val[$date] : 0).']'.($date < $ret['max_date'] ? ',' : '');
+        }
+        echo '];'."\n";
+        echo 'options.series['.$series_cnt++.'].name = "'.$key.'";'."\n";
+    }
+
+    ?>
+
+    if(options.series.length){
+        Highcharts.setOptions({global:{useUTC:false}});
+        chart = new Highcharts.StockChart(options);
+    }
+
+    //TODO: On first load chart's date range input fields are not shown.
+
+    jQuery('#mycarousel').jcarousel({
+        vertical: true,
+        scroll: 10,
+        itemLoadCallback: function(carousel, state){
+            theModelCarousel = carousel;
+            // Check if the requested items already exist
+            if (carousel.has(carousel.first, carousel.last)) {
+                return;
+            }
+
+            var ajaxBlockUrl = '<?php echo $this->getUrl('*/osmm/wireXml/', array('_current' => true)) ?>';
+            new Ajax.Request(ajaxBlockUrl, {
+                parameters: {isAjax: 'true',
+                    form_key: FORM_KEY,
+                    project: <?php echo $this->getCurrentProjectId() ?>,
+                    first: carousel.first,
+                    from: extrems.min/1000,
+                    to: extrems.max/1000
+                },
+                onSuccess: function(transport) {
+                    try {
+                        var ret = transport.responseText.split('<hr>');
+                        if(size = parseInt(ret[0])){
+                            carousel.size(size);
+                            for(var i=1; i<ret.length; i++){
+                                carousel.add(carousel.first + (i-1), ret[i]);
+                            }
+                        }else{
+                            carousel.size(1);
+                            carousel.add(1, '<li align="center"><br/><?php echo $this->__('No records found.') ?></li>');
+                        }
+                    } catch (e) {
+                        alert(e);
+                    }
+                }
+            });
+        },
+        // For some weird reason jCarousel can't determine the height of the clip automatically.
+        itemFallbackDimension:100
+    });
+});
+
+function changeProject(projectObj) {
+    var ajaxBlockUrl = '<?php echo $this->getUrl('*/osmm/ajaxBlock', array('_current' => true)) ?>';
+    new Ajax.Request(ajaxBlockUrl, {
+        parameters: {
+            project_id: projectObj.value,
+            isAjax: 'true',
+            form_key: FORM_KEY
+        },
+        onSuccess: function(transport) {
+            var tabContentElementId = 'diagram_tab_osmm_content';
+            try {
+                if (transport.responseText.isJSON()) {
+                    var response = transport.responseText.evalJSON();
+                    if (response.error) {
+                        alert(response.message);
+                    }
+                    if(response.ajaxExpired && response.ajaxRedirect) {
+                        setLocation(response.ajaxRedirect);
+                    }
+                } else {
+                    $(tabContentElementId).update(transport.responseText);
+                }
+            }
+            catch (e) {
+                $(tabContentElementId).update(transport.responseText);
+            }
+        }
+    });
+}
+
+//]]>
+</script>
+
+<?php else : ?>
+    <div style="margin:20px;">
+        <p class="a-center" style="width:587px; margin:0 auto;"><?php echo $this->__('No Data Found') ?></p>
+    </div>
+<?php endif ?>

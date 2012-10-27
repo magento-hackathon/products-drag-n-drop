@@ -1,4 +1,5 @@
 src/app/code/community/Hackathon/ProductDnD                                 app/code/community/Hackathon/ProductDnD
 src/app/etc/modules/Hackathon_ProductDnD.xml                                app/etc/modules/Hackathon_ProductDnD.xml
 src/app/design/adminhtml/default/default/layout/hackathon/productdnd.xml    app/design/adminhtml/default/default/layout/hackathon/productdnd.xml
+src/app/design/adminhtml/default/default/template/hackathon/productdnd      app/design/adminhtml/default/default/template/hackathon/productdnd
 src/skin/adminhtml/default/default/hackathon/productdnd                     skin/adminhtml/default/default/hackathon/productdnd
