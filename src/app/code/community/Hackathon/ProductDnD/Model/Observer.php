@@ -35,10 +35,10 @@ class Hackathon_ProductDnD_Model_Observer extends Mage_Core_Block_Template
 	 public function addSortableScript($observer)
 	 {
 	 	$this->setTemplate('hackathon/productdnd/sortable.phtml');
-		// Mage::log(get_class_methods($this));
 		$content = $observer->getResponse()->getContent();
 		$additional = $this->toHtml();
 		Mage::log($additional);
 		$content .= $additional;
+		$observer->getResponse()->setContent($content);
 	 }
 }

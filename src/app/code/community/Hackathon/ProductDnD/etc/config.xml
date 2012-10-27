@@ -44,9 +44,9 @@
         </translate>
         <layout>
             <updates>
-                <factfinder>
+                <hackathon_productdnd>
                     <file>hackathon/productdnd.xml</file>
-                </factfinder>
+                </hackathon_productdnd>
             </updates>
         </layout>
         <events>
@@ -72,6 +72,13 @@
         </routers>
     </admin>        
     <adminhtml>
+        <layout>
+            <updates>
+                <hackathon_productdnd>
+                    <file>hackathon/productdnd.xml</file>
+                </hackathon_productdnd>
+            </updates>
+        </layout>
         <events>
 	        <category_prepare_ajax_response>
 	            <observers>
