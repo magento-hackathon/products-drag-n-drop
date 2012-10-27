@@ -1,47 +1,11 @@
 <script type="text/javascript">
         $('catalog_category_products_table').down('tbody').setAttribute('id', 'catalog_category_products_table_tbody');
 
-        resetListItems();
+        var listId = 'catalog_category_products_table_tbody';
+        var listTag = 'tr';
+        var ajaxUrl = '<?php echo $this->getUrl('*/productDnD/ajaxBlock', array('_current' => true)) ?>';
 
-        var productId;
-        var listItemId;
-
-        Sortable.create('catalog_category_products_table_tbody', { tag: 'tr',
-            onUpdate: function(list) {
-                var listSize = list.length;
-                var counter = 0;
-                list.select('tr').each(function(item) {
-                    counter++;
-                    if(item.getAttribute('id') == listItemId) {
-                        if(counter == 1) {
-                            var delta = 0 - item.getAttribute('id').replace('item_','');
-                        } else {
-                            var previousItem = item.previous().getAttribute('id').replace('item_','');
-                            var delta = previousItem - item.getAttribute('id').replace('item_','');
-                        }
-                        if(delta <= 0) {
-                            delta += 1;
-                        }
-
-                        changeOrder(productId, delta);
-
-                        resetListItems();
-                        throw $break;
-                    }
-                })
-            },
-            onChange: function(item) {
-                productId = item.down().next().innerHTML;
-                listItemId = item.getAttribute('id');
-            }
-        });
-
-        function resetListItems() {
-            var i = 0;
-            $('catalog_category_products_table').down('tbody').select('tr').each(function(item) {
-                i++;
-                item.setAttribute('id', 'item_' + i);
-            });
-        }
+        resetListItems(listId, listTag);
+        processSorting(listId, listTag, ajaxUrl);
 </script>
 

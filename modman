@@ -5,3 +5,4 @@ src/app/design/adminhtml/default/default/template/hackathon/productdnd      app/
 src/app/design/frontend/base/default/layout/hackathon                       app/design/frontend/base/default/layout/hackathon
 src/skin/frontend/base/default/js/hackathon                                 skin/frontend/base/default/js/hackathon
 src/skin/frontend/base/default/css/hackathon                                skin/frontend/base/default/css/hackathon
+src/js/hackathon/productdnd.js                                              js/hackathon/productdnd.js
