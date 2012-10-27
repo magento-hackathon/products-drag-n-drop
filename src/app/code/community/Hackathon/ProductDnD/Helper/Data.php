@@ -9,7 +9,7 @@
 class Hackathon_ProductDnD_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
-    public function isAllowed()
+    public function isActivated()
     {
         return true;
     }
