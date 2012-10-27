@@ -4,8 +4,13 @@
         var listId = 'catalog_category_products_table_tbody';
         var listTag = 'tr';
         var ajaxUrl = '<?php echo $this->getUrl('*/productDnD/ajaxBlock', array('_current' => true)) ?>';
+        var categoryId = '<?php echo $this->getRequest()->getParam('id'); ?>';
 
-        resetListItems(listId, listTag);
-        processSorting(listId, listTag, ajaxUrl);
+        console.log('<?php echo Mage::registry('current_category')->getId(); ?>');
+
+        if(categoryId) {
+            resetListItems(listId, listTag);
+            processSorting(categoryId, listId, listTag, ajaxUrl);
+        }
 </script>
 

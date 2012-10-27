@@ -1,17 +1,17 @@
-function changeOrder(productId, neighbourId, ajaxBlockUrl)
+function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl)
 {
     new Ajax.Request(ajaxBlockUrl, {
         parameters: {
+            categoryId: categoryId,
             productId: productId,
             neighbourId: neighbourId,
             isAjax: 'true',
-            form_key: FORM_KEY
+            form_key: typeof FORM_KEY != undefined ? FORM_KEY : ''
         }
     });
 }
 
-function processSorting (listId, listTag, ajaxUrl) {
-    var productId;
+function processSorting (categoryId, listId, listTag, ajaxUrl) {
     var listItemId;
 
     Sortable.create(listId, { tag: listTag,
@@ -47,7 +47,7 @@ function processSorting (listId, listTag, ajaxUrl) {
                         }
                     }
 
-                    changeOrder(productId, neighbourId, ajaxUrl);
+                    changeOrder(categoryId, productId, neighbourId, ajaxUrl);
                     resetListItems(listId, listTag);
                     throw $break;
                 }
