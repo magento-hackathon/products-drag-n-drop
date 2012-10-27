@@ -18,4 +18,14 @@
             </hackathon_productdnd>
         </helpers>
     </global>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <hackathon_productdnd>
+                    <file>hackathon/productdnd.xml</file>
+                </hackathon_productdnd>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>

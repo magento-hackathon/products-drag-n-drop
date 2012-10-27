@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_catalog_category_edit>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>hackathon/productdnd/js/sortable.js</name><params/><if/></action>
+        </reference>
+    </adminhtml_catalog_category_edit>
+</layout>
