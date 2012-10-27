@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<modules>
-		<Hackathon_ProductDnD>
-			<version>0.1.0</version>
-		</Hackathon_ProductDnD>
-	</modules>
-	
-	<global>
+    <modules>
+        <Hackathon_ProductDnD>
+            <version>0.1.0</version>
+        </Hackathon_ProductDnD>
+    </modules>
+
+    <global>
         <models>
             <hackathon_productdnd>
                 <class>Hackathon_ProductDnD_Model</class>
             </hackathon_productdnd>
-		</models>
-	</global>
+        </models>
+    </global>
 </config>
