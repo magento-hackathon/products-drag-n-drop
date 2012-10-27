@@ -1,15 +1,15 @@
+<button onclick="changeOrder()">test</button>
 <script type="text/javascript">
     document.observe("dom:loaded", function()
     {
         $('catalog_category_products_table').down('tbody').setAttribute('id', 'catalog_category_products_table_tbody');
-        Sortable.create("catalog_category_products_table_tbody", { tag: "tr" });
+        Sortable.create('catalog_category_products_table_tbody', { tag: 'tr' });
     });
 
     function changeOrder() {
-        var ajaxBlockUrl = '<?php echo $this->getUrl('*/hackathon_productdnd/ajaxBlock', array('_current' => true)) ?>';
+        var ajaxBlockUrl = '<?php echo $this->getUrl('*/productDnD/ajaxBlock', array('_current' => true)) ?>';
         new Ajax.Request(ajaxBlockUrl, {
             parameters: {
-                project_id: projectObj.value,
                 isAjax: 'true',
                 form_key: FORM_KEY
             },
@@ -32,6 +32,7 @@
                 }
             }
         });
+        return false;
     }
 </script>
 
