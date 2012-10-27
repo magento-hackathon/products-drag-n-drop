@@ -49,6 +49,13 @@
         </routers>
     </admin>        
     <adminhtml>
+        <layout>
+            <updates>
+                <hackathon_productdnd>
+                    <file>hackathon/productdnd.xml</file>
+                </hackathon_productdnd>
+            </updates>
+        </layout>
         <events>
 	        <category_prepare_ajax_response>
 	            <observers>

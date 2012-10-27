@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    function changeOrder() {
+        var ajaxBlockUrl = '<?php echo $this->getUrl('*/productDnD/ajaxBlock', array('_current' => true)) ?>';
+        new Ajax.Request(ajaxBlockUrl, {
+            parameters: {
+                isAjax: 'true',
+                form_key: FORM_KEY
+            },
+            onSuccess: function(transport) {
+                try {
+                    if (transport.responseText.isJSON()) {
+                        var response = transport.responseText.evalJSON();
+                        if (response.error) {
+                            alert(response.message);
+                        }
+                        if(response.ajaxExpired && response.ajaxRedirect) {
+                            setLocation(response.ajaxRedirect);
+                        }
+                    } else {
+                        alert(transport.responseText);
+                    }
+                }
+                catch (e) {
+                    alert(transport.responseText);
+                }
+            }
+        });
+        return false;
+    }
+</script>

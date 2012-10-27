@@ -2,7 +2,7 @@
 <layout>
     <adminhtml_catalog_category_edit>
         <reference name="js">
-            <block type="core/template" name="productdnd" template="hackathon/productdnd/sortable.phtml"/>
+            <block type="core/template" name="productdnd" template="hackathon/productdnd/functions.phtml"/>
         </reference>
     </adminhtml_catalog_category_edit>
 </layout>
