@@ -1,0 +1,1 @@
+Module will add drag and drop functionality for products in backend and frontend.
