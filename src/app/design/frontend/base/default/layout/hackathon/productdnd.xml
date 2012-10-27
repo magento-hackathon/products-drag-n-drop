@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <hackathon_productdnd_enabled>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/hackathon/productdnd/sortable.js</name></action>
+            <action method="addCss"><stylesheet>css/hackathon/productdnd/sortable.css</stylesheet></action>
+        </reference>
+    </hackathon_productdnd_enabled>
+</layout>
