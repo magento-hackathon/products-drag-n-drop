@@ -3,6 +3,5 @@ src/app/etc/modules/Hackathon_ProductDnD.xml                                app/
 src/app/design/adminhtml/default/default/layout/hackathon/productdnd.xml    app/design/adminhtml/default/default/layout/hackathon/productdnd.xml
 src/app/design/adminhtml/default/default/template/hackathon/productdnd      app/design/adminhtml/default/default/template/hackathon/productdnd
 src/app/design/frontend/base/default/layout/hackathon                       app/design/frontend/base/default/layout/hackathon
-src/skin/adminhtml/default/default/hackathon/productdnd                     skin/adminhtml/default/default/hackathon/productdnd
 src/skin/frontend/base/default/js/hackathon                                 skin/frontend/base/default/js/hackathon
 src/skin/frontend/base/default/css/hackathon                                skin/frontend/base/default/css/hackathon
