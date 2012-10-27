@@ -12,6 +12,11 @@
                 <class>Hackathon_ProductDnD_Model</class>
             </hackathon_productdnd>
         </models>
+        <blocks>
+            <hackathon_productdnd>
+                <class>Hackathon_ProductDnD_Block</class>
+            </hackathon_productdnd>
+        </blocks>
         <helpers>
             <hackathon_productdnd>
                 <class>Hackathon_ProductDnD_Helper</class>
@@ -19,6 +24,24 @@
         </helpers>
     </global>
     <frontend>
+        <routers>
+            <productdnd>
+                <use>standard</use>
+                <args>
+                    <module>Hackathon_ProductDnD</module>
+                    <frontName>productdnd</frontName>
+                </args>
+            </productdnd>
+        </routers>
+        <translate>
+            <modules>
+                <Hackathon_ProductDnD>
+                    <files>
+                        <default>Hackathon_ProductDnD.csv</default>
+                    </files>
+                </Hackathon_ProductDnD>
+            </modules>
+        </translate>
         <layout>
             <updates>
                 <hackathon_productdnd>

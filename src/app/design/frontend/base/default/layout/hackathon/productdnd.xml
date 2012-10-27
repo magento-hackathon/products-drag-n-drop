@@ -5,5 +5,8 @@
             <action method="addItem"><type>skin_js</type><name>js/hackathon/productdnd/sortable.js</name></action>
             <action method="addCss"><stylesheet>css/hackathon/productdnd/sortable.css</stylesheet></action>
         </reference>
+        <reference name="content">
+            <block type="hackathon_productdnd/json_products" after="category.products" name="productdnd.json.products" />
+        </reference>
     </hackathon_productdnd_enabled>
 </layout>
