@@ -14,6 +14,6 @@ class Hackathon_ProductDnD_Block_Json_Products extends Mage_Core_Block_Abstract
         $productCollection = $layer->getProductCollection();
         $productIds = $productCollection->getLoadedIds();
 
-        return '<script type="text/javascript">var dndproducts = "' . json_encode($productIds) . '"; var dndcategory = ' . $layer->getCurrentCategory()->getId() . ';--></script>';
+        return '<script type="text/javascript">var dndproducts = "' . json_encode($productIds) . '"; var dndcategory = ' . $layer->getCurrentCategory()->getId() . ';</script>';
     }
 }
