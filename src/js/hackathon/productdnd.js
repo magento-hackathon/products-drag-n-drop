@@ -54,18 +54,22 @@ function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl, listId, l
 function processSorting (categoryId, listId, listTag, ajaxUrl)
 {
     var listItemId;
+    
+    var isBackend = typeof FORM_KEY != 'undefined';
 
-    /**
-     * Firefox bug/feature workaround
-     */
-    $(listId).select(listTag).each(function(item) {
-        clickEvents = item.getStorage().get('prototype_event_registry').get('click');
-        clickEvents.each(function(wrapper){
-            //console.log(wrapper.handler);
-            Event.observe(item.select('.checkbox').first(), 'click', wrapper.handler);
-        })
-        item.stopObserving('click');
-    });
+    if (isBackend) {
+	    /**
+	     * Firefox bug/feature workaround for checkbox deselecting in the category products grid
+	     */
+	    $(listId).select(listTag).each(function(item) {
+	        clickEvents = item.getStorage().get('prototype_event_registry').get('click');
+	        clickEvents.each(function(wrapper){
+	            //console.log(wrapper.handler);
+	            Event.observe(item.select('.checkbox').first(), 'click', wrapper.handler);
+	        })
+	        item.stopObserving('click');
+	    });
+	}
 
     Sortable.create(listId, { tag: listTag,
         onUpdate: function(list) {
