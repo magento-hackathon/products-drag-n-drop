@@ -1,30 +1,34 @@
 function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl, listId, listTag)
 {
+    var isBackend = typeof FORM_KEY != 'undefined';
+
     new Ajax.Request(ajaxBlockUrl, {
         parameters: {
             categoryId: categoryId,
             productId: productId,
             neighbourId: neighbourId,
             isAjax: 'true',
-            form_key: typeof FORM_KEY != 'undefined' ? FORM_KEY : ''
+            form_key: isBackend ? FORM_KEY : ''
         },
         onSuccess: function(transport) {
-            try {
-                if (transport.responseText.isJSON()) {
-                    var response = transport.responseText.evalJSON();
-                    if (response.error) {
-                        alert(response.message);
+            if (isBackend) {
+                try {
+                    if (transport.responseText.isJSON()) {
+                        var response = transport.responseText.evalJSON();
+                        if (response.error) {
+                            alert(response.message);
+                        }
+                        if(response.ajaxExpired && response.ajaxRedirect) {
+                            setLocation(response.ajaxRedirect);
+                        }
+                        resetListItems(listId, listTag, response);
+                    } else {
+                        alert(transport.responseText);
                     }
-                    if(response.ajaxExpired && response.ajaxRedirect) {
-                        setLocation(response.ajaxRedirect);
-                    }
-                    resetListItems(listId, listTag, response);
-                } else {
+                }
+                catch (e) {
                     alert(transport.responseText);
                 }
-            }
-            catch (e) {
-                alert(transport.responseText);
             }
         }
     });
