@@ -84,10 +84,18 @@
 	            <observers>
 	                <hackathon_productdnd_addSortableScript>
 	                    <class>hackathon_productdnd/observer</class>
-	                    <method>addSortableScript</method>
+	                    <method>addSortableScriptOnEdit</method>
 	                </hackathon_productdnd_addSortableScript>
 	            </observers>
 	        </category_prepare_ajax_response>
+            <controller_action_postdispatch_adminhtml_catalog_category_grid>
+                <observers>
+                    <hackathon_productdnd_addSortableScript>
+                        <class>hackathon_productdnd/observer</class>
+                        <method>addSortableScriptOnGrid</method>
+                    </hackathon_productdnd_addSortableScript>
+                </observers>
+            </controller_action_postdispatch_adminhtml_catalog_category_grid>
 	    </events>
     </adminhtml>
 </config>

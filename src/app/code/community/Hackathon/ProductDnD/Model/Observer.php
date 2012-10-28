@@ -33,13 +33,24 @@ class Hackathon_ProductDnD_Model_Observer extends Mage_Core_Block_Template
 	 * 
 	 * @param Varien_Event_Observer $observer
 	 */
-	 public function addSortableScript($observer)
+	 public function addSortableScriptOnEdit($observer)
 	 {
-	 	$this->setTemplate('hackathon/productdnd/sortable.phtml');
-		$content = $observer->getResponse()->getContent();
-		$additional = $this->toHtml();
-		Mage::log($additional);
-		$content .= $additional;
-		$observer->getResponse()->setContent($content);
+         $content = $observer->getResponse()->getContent();
+         $content = $this->appendScript($content);
+		 $observer->getResponse()->setContent($content);
 	 }
+
+     public function addSortableScriptOnGrid($observer)
+     {
+         $content = $observer->getControllerAction()->getResponse()->getBody();
+         $content = $this->appendScript($content);
+         $observer->getControllerAction()->getResponse()->setBody($content);
+     }
+
+    public function appendScript($content)
+    {
+        $this->setTemplate('hackathon/productdnd/sortable.phtml');
+        $additional = $this->toHtml();
+        return $content . $additional;
+    }
 }
