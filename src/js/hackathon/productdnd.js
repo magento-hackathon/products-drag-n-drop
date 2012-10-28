@@ -1,7 +1,7 @@
+var isBackend = typeof FORM_KEY != 'undefined';
+
 function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl, listId, listTag)
 {
-    var isBackend = typeof FORM_KEY != 'undefined';
-
     if (!isBackend) {
         // display centered loader hint box with icon and text
         var scrollTop = $(document).viewport.getScrollOffsets().top;
@@ -54,8 +54,6 @@ function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl, listId, l
 function processSorting (categoryId, listId, listTag, ajaxUrl)
 {
     var listItemId;
-    
-    var isBackend = typeof FORM_KEY != 'undefined';
 
     if (isBackend) {
 	    /**
