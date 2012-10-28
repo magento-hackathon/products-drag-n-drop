@@ -71,14 +71,12 @@ function resetListItems(listId, listTag) {
 
 function resetListItemsFrontend(listId, listTag, dndproducts) {
     var i = 0;
-
     var productIds = dndproducts.evalJSON();
-    console.log(productIds);
+
     $(listId).select(listTag+'.item').each(function(item) {
         i++;
         item.setAttribute('id', 'item_' + i);
         item.setAttribute('productId', productIds[i - 1]);
         item.addClassName('dnd-item');
-        console.log(productIds[i - 1]);
     });
 }
