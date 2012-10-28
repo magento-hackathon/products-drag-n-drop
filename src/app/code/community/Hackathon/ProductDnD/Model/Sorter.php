@@ -24,7 +24,6 @@ class Hackathon_ProductDnD_Model_Sorter extends Mage_Core_Model_Abstract
                 'neighborId' => $neighborId,
                 'error' => Mage::helper('hackathon_productdnd')->__('Product not found')
             );
-            return false;
         }
 
         array_multisort($oldPositions, $positions);

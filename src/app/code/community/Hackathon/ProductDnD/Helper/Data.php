@@ -20,7 +20,7 @@ class Hackathon_ProductDnD_Helper_Data extends Mage_Core_Helper_Abstract
     {
 
         if (Mage::getDesign()->getArea() == 'adminhtml') {
-            return self::XML_PATH_DRAGNDROP_ACTIVE_BACKEND;
+            return Mage::getStoreConfig(self::XML_PATH_DRAGNDROP_ACTIVE_BACKEND);
         }
 
         if (is_null($store)) {

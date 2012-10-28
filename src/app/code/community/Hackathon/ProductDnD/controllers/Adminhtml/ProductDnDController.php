@@ -9,10 +9,8 @@ class Hackathon_ProductDnD_Adminhtml_ProductDnDController extends Mage_Adminhtml
         $productId = (int) $this->getRequest()->getParam('productId');
 
         $sortModel = Mage::getModel('hackathon_productdnd/sorter');
-        $sortModel->changeProductPosition($categoryId, $productId, $neighborId);
+        $_response = $sortModel->changeProductPosition($categoryId, $productId, $neighborId);
 
-        $this->getResponse()->setBody(
-            Mage::app()->getRequest()->getParam('categoryId') . ' - ' . Mage::app()->getRequest()->getParam('productId') . ' - ' . Mage::app()->getRequest()->getParam('neighbourId')
-        );
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($_response));
     }
 }

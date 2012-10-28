@@ -7,3 +7,5 @@ src/app/design/frontend/base/default/layout/hackathon                       app/
 src/skin/frontend/base/default/js/hackathon                                 skin/frontend/base/default/js/hackathon
 src/skin/frontend/base/default/css/hackathon                                skin/frontend/base/default/css/hackathon
 src/js/hackathon/productdnd.js                                              js/hackathon/productdnd.js
+src/app/locale/de_DE/Hackathon_ProductDnD.csv                               app/locale/de_DE/Hackathon_ProductDnD.csv
+src/app/locale/en_US/Hackathon_ProductDnD.csv                               app/locale/en_US/Hackathon_ProductDnD.csv

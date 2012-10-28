@@ -6,8 +6,6 @@
         var ajaxUrl = '<?php echo $this->getUrl('*/productDnD/ajaxBlock', array('_current' => true)) ?>';
         var categoryId = '<?php echo $this->getRequest()->getParam('id'); ?>';
 
-        console.log('<?php echo Mage::registry('current_category')->getId(); ?>');
-
         if(categoryId) {
             resetListItems(listId, listTag);
             processSorting(categoryId, listId, listTag, ajaxUrl);
