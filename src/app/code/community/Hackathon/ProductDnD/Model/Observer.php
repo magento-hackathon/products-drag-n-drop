@@ -21,8 +21,18 @@ class Hackathon_ProductDnD_Model_Observer extends Mage_Core_Block_Template
             && $request->getControllerName() == 'category'
             && $request->getActionName() == 'view'
             && Mage::getBlockSingleton('catalog/product_list_toolbar')->getCurrentOrder() == 'position') {
+
+            $category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+
             $layout = $observer->getLayout();
             $update = $layout->getUpdate();
+
+            // sorting is not available if category is anchor and include child categories
+            if ($category->getIsAnchor() && count($category->getChildrenCategories()) > 0) {
+                $update->addHandle('hackathon_productdnd_inactive');
+                return;
+            }
+
             $update->addHandle('hackathon_productdnd_enabled');
         }
     }

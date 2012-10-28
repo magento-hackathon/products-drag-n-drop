@@ -15,4 +15,17 @@
             <block type="core/template" name="productdnd.hint.texts" template="hackathon/productdnd/hint.phtml" output="toHtml" />
         </reference>
     </hackathon_productdnd_enabled>
+    <hackathon_productdnd_inactive>
+        <reference name="root">
+            <action method="addBodyClass"><name>productdnd-enabled</name></action>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/hackathon/productdnd/sortable.css</stylesheet></action>
+        </reference>
+        <reference name="after_body_start">
+            <block type="core/template" name="productdnd.hint.texts" template="hackathon/productdnd/hint.phtml" output="toHtml">
+                <action method="setInactiveMode"><mode>true</mode></action>
+            </block>
+        </reference>
+    </hackathon_productdnd_inactive>
 </layout>

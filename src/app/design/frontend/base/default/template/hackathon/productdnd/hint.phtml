@@ -1,1 +1,13 @@
-<div class="productdnd-hint"><?php echo $this->__('You are currently in product sorting mode. Simply drag and drop the products in the list to change their position.'); ?></div>
+<div class="productdnd-hint">
+    <?php if ($this->getInactiveMode()): ?>
+        <?php echo $this->__('You are currently in product sorting mode. Category is anchor and includes child categories. Product sorting is not available in this case.'); ?>
+    <?php else: ?>
+        <?php echo $this->__('You are currently in product sorting mode. Simply drag and drop the products in the list to change their position.'); ?>
+    <?php endif; ?>
+</div>
+<?php if (!$this->getInactiveMode()): ?>
+    <div id="productdnd-preloader" class="productdnd-preloader">
+        <img src="<?php echo $this->getSkinUrl('images/ajax-loader.gif'); ?>" />
+        <?php echo $this->__('Please wait while saving the new order.'); ?>
+    </div>
+<?php endif; ?>
