@@ -49,7 +49,8 @@ class Hackathon_ProductDnD_Model_Observer extends Mage_Core_Block_Template
      */
      public function addSortableScriptOnGrid($observer)
      {
-         if ($observer->getControllerAction()->getRequest()->getParam('sort') == 'position') {
+         if (Mage::helper('hackathon_productdnd')->isActivated() &&
+             $observer->getControllerAction()->getRequest()->getParam('sort') == 'position') {
              $content = $observer->getControllerAction()->getResponse()->getBody();
              $content = $this->appendScript($content);
              $observer->getControllerAction()->getResponse()->setBody($content);
