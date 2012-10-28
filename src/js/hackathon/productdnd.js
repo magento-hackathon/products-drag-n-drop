@@ -38,6 +38,18 @@ function processSorting (categoryId, listId, listTag, ajaxUrl)
 {
     var listItemId;
 
+    /**
+     * Firefox bug/feature workaround
+     */
+    $(listId).select(listTag).each(function(item) {
+        clickEvents = item.getStorage().get('prototype_event_registry').get('click');
+        clickEvents.each(function(wrapper){
+            //console.log(wrapper.handler);
+            Event.observe(item.select('.checkbox').first(), 'click', wrapper.handler);
+        })
+        item.stopObserving('click');
+    });
+
     Sortable.create(listId, { tag: listTag,
         onUpdate: function(list) {
             var listSize = list.length;
