@@ -19,7 +19,8 @@ class Hackathon_ProductDnD_Model_Observer extends Mage_Core_Block_Template
         if (Mage::helper('hackathon_productdnd')->isActivated()
             && $request->getModuleName() == 'catalog'
             && $request->getControllerName() == 'category'
-            && $request->getActionName() == 'view') {
+            && $request->getActionName() == 'view'
+            && Mage::getBlockSingleton('catalog/product_list_toolbar')->getCurrentOrder() == 'position') {
             $layout = $observer->getLayout();
             $update = $layout->getUpdate();
             $update->addHandle('hackathon_productdnd_enabled');

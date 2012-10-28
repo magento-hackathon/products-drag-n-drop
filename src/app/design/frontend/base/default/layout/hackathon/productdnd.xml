@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
     <hackathon_productdnd_enabled>
+        <reference name="root">
+            <action method="addBodyClass"><name>productdnd-enabled</name></action>
+        </reference>
         <reference name="head">
             <!--<action method="addItem"><type>skin_js</type><name>js/hackathon/productdnd/sortable.js</name></action>-->
             <action method="addCss"><stylesheet>css/hackathon/productdnd/sortable.css</stylesheet></action>
@@ -8,6 +11,9 @@
         </reference>
         <reference name="content">
             <block type="hackathon_productdnd/json_products" name="productdnd.js.sorting" template="hackathon/productdnd/sortable.phtml"/>
+        </reference>
+        <reference name="after_body_start">
+            <block type="core/template" name="productdnd.hint.texts" template="hackathon/productdnd/hint.phtml" output="toHtml" />
         </reference>
     </hackathon_productdnd_enabled>
 </layout>
