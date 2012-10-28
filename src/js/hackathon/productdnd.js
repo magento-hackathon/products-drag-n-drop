@@ -2,6 +2,21 @@ function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl, listId, l
 {
     var isBackend = typeof FORM_KEY != 'undefined';
 
+    if (!isBackend) {
+        // display centered loader hint box with icon and text
+        var scrollTop = $(document).viewport.getScrollOffsets().top;
+        var avTop     = ($(document).viewport.getHeight() / 2) - ($('productdnd-preloader').getLayout().get('margin-box-height') / 2) + scrollTop;
+
+        if (avTop <= 10) {
+            avTop = 10;
+        }
+
+        var styles = { top : avTop + 'px' };
+
+        $('productdnd-preloader').setStyle(styles);
+        $('productdnd-preloader').removeClassName('hide');
+    }
+
     new Ajax.Request(ajaxBlockUrl, {
         parameters: {
             categoryId: categoryId,
@@ -29,6 +44,8 @@ function changeOrder(categoryId, productId, neighbourId, ajaxBlockUrl, listId, l
                 catch (e) {
                     alert(transport.responseText);
                 }
+            } else {
+                $('productdnd-preloader').addClassName('hide');
             }
         }
     });

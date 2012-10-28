@@ -1,5 +1,5 @@
 body.productdnd-enabled {
-    margin-top: 30px !important;
+    margin-top: 32px !important;
 }
 
 .dnd-item:hover {
@@ -16,7 +16,8 @@ body.productdnd-enabled {
 
 .productdnd-hint {
     background-color: #FDFAA4;
-    color: #ce0000;
+    border-bottom: 2px solid #F1AF73;
+    color: #C76200;
     font-weight: bold;
     height: 20px;
     padding: 5px 0;
@@ -28,20 +29,24 @@ body.productdnd-enabled {
 }
 
 .productdnd-preloader {
-    display: none;
-    background-color: rgba(253, 250, 164, 0.9);
-    color: #ce0000;
+    background-color: #FFF4E9;
+    border: 2px solid #F1AF73;
+    color: #C76200;
     height: 50px;
+    font-weight: bold;
     margin-top: -25px;
-    margin-left: -110px;
+    margin-left: -120px;
     padding: 20px;
     position: absolute;
-    width: 220px;
+    width: 240px;
     top: 50%;
     left: 50%;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    z-index: 500;
 }
+    .productdnd-preloader.hide {
+        display: none;
+    }
+
     .productdnd-preloader img {
         display: block;
         margin: 0 auto;
