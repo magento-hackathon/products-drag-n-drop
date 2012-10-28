@@ -28,8 +28,9 @@ class Hackathon_ProductDnD_Model_Observer extends Mage_Core_Block_Template
     }
 	
 	/**
-	 * Adds the sortable.js to the head of the page after the ajax-Request for the category-products
-	 * was loaded
+     * Appends the "sortable" js code to the bottom of ajax-Request for the category-products initially loaded.
+     *
+     * This observer is currently not called as default sort order is by ID
 	 * 
 	 * @param Varien_Event_Observer $observer
 	 */
@@ -40,11 +41,19 @@ class Hackathon_ProductDnD_Model_Observer extends Mage_Core_Block_Template
 		 $observer->getResponse()->setContent($content);
 	 }
 
+    /**
+     * Appends the "sortable" js code to the bottom of ajax-Request for the category-products loaded after
+     * changing sort order.
+     *
+     * @param Varien_Event_Observer $observer
+     */
      public function addSortableScriptOnGrid($observer)
      {
-         $content = $observer->getControllerAction()->getResponse()->getBody();
-         $content = $this->appendScript($content);
-         $observer->getControllerAction()->getResponse()->setBody($content);
+         if ($observer->getControllerAction()->getRequest()->getParam('sort') == 'position') {
+             $content = $observer->getControllerAction()->getResponse()->getBody();
+             $content = $this->appendScript($content);
+             $observer->getControllerAction()->getResponse()->setBody($content);
+         }
      }
 
     public function appendScript($content)
