@@ -78,6 +78,7 @@ function resetListItemsFrontend(listId, listTag, dndproducts) {
         i++;
         item.setAttribute('id', 'item_' + i);
         item.setAttribute('productId', productIds[i - 1]);
+        item.addClassName('dnd-item');
         console.log(productIds[i - 1]);
     });
 }
