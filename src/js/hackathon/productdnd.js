@@ -104,6 +104,7 @@ function resetListItems(listId, listTag, newOrder)
 {
     var i = 0;
     var changePositions = false;
+    var inputElement, newId;
     if (typeof newOrder == 'object') {
         newOrder = object2array(newOrder);
         changePositions = true;
@@ -114,7 +115,9 @@ function resetListItems(listId, listTag, newOrder)
         item.setAttribute('id', 'item_' + i);
 
         if (changePositions && (newId = newOrder[getProductId(item, listTag)])) {
-            item.select('input[type=text]').first().setAttribute('value', newId);
+            inputElement = item.select('input[type=text]').first();
+            inputElement.setAttribute('value', newId);
+            inputElement.triggerEvent('keyup');
        }
     });
 }
@@ -152,3 +155,17 @@ function resetListItemsFrontend(listId, listTag, dndproducts)
         item.addClassName('dnd-item');
     });
 }
+
+Element.prototype.triggerEvent = function(eventName)
+{
+    if (document.createEvent) {
+        var evt = document.createEvent('HTMLEvents');
+        evt.initEvent(eventName, true, true);
+
+        this.dispatchEvent(evt);
+    }
+
+    if (this.fireEvent) {
+        this.fireEvent('on' + eventName);
+    }
+};
