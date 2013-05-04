@@ -98,4 +98,13 @@
             </controller_action_postdispatch_adminhtml_catalog_category_grid>
 	    </events>
     </adminhtml>
+    <default>
+        <catalog>
+            <dragndrop>
+                <active_frontend>
+                    <active>0</active>
+                </active_frontend>
+            </dragndrop>
+        </catalog>
+    </default>
 </config>
