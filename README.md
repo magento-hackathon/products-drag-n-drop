@@ -1,5 +1,7 @@
 # Checkout https://github.com/ffuenf/Ffuenf_CategoryProductSortBackend
 
+If you want to adopt this extension, please drop an email to treasury@firegento.com
+
 Please note that this extension is orphan and not maintained anymore. Sorry.
 ============================================================================
 
