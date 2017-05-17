@@ -1,3 +1,5 @@
+# Checkout https://github.com/ffuenf/Ffuenf_CategoryProductSortBackend
+
 Please note that this extension is orphan and not maintained anymore. Sorry.
 ============================================================================
 
